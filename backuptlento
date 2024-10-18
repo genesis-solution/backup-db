@@ -7508,17 +7508,17 @@ CREATE TABLE `payroll_allowance` (
   `shift_id_id` bigint(20) DEFAULT NULL,
   `work_type_id_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `payroll_allowance_title_is_taxable_is_cond_6fe89b5e_uniq` (`title`,`is_taxable`,`is_condition_based`,`field`,`condition`,`value`,`is_fixed`,`amount`,`based_on`,`rate`,`per_attendance_fixed_amount`,`shift_id_id`,`shift_per_attendance_amount`,`amount_per_one_hr`,`work_type_id_id`,`work_type_per_attendance_amount`) USING HASH,
-  KEY `payroll_allowance_shift_id_id_2a990c10_fk_base_employeeshift_id` (`shift_id_id`),
-  KEY `payroll_allowance_work_type_id_id_da9a0d44_fk_base_worktype_id` (`work_type_id_id`),
-  KEY `payroll_allowance_company_id_id_5912bfe7_fk_base_company_id` (`company_id_id`),
-  KEY `payroll_allowance_created_by_id_1c73f9ba_fk_auth_user_id` (`created_by_id`),
-  KEY `payroll_allowance_modified_by_id_947a87fd_fk_auth_user_id` (`modified_by_id`),
-  CONSTRAINT `payroll_allowance_company_id_id_5912bfe7_fk_base_company_id` FOREIGN KEY (`company_id_id`) REFERENCES `base_company` (`id`),
-  CONSTRAINT `payroll_allowance_created_by_id_1c73f9ba_fk_auth_user_id` FOREIGN KEY (`created_by_id`) REFERENCES `auth_user` (`id`),
-  CONSTRAINT `payroll_allowance_modified_by_id_947a87fd_fk_auth_user_id` FOREIGN KEY (`modified_by_id`) REFERENCES `auth_user` (`id`),
-  CONSTRAINT `payroll_allowance_shift_id_id_2a990c10_fk_base_employeeshift_id` FOREIGN KEY (`shift_id_id`) REFERENCES `base_employeeshift` (`id`),
-  CONSTRAINT `payroll_allowance_work_type_id_id_da9a0d44_fk_base_worktype_id` FOREIGN KEY (`work_type_id_id`) REFERENCES `base_worktype` (`id`)
+  UNIQUE KEY `title_is_taxable_is_cond_6fe89b5e_uniq` (`title`,`is_taxable`,`is_condition_based`,`field`,`condition`,`value`,`is_fixed`,`amount`,`based_on`,`rate`,`per_attendance_fixed_amount`,`shift_id_id`,`shift_per_attendance_amount`,`amount_per_one_hr`,`work_type_id_id`,`work_type_per_attendance_amount`) USING HASH,
+  KEY `shift_id_id_2a990c10_fk_base_employeeshift_id` (`shift_id_id`),
+  KEY `work_type_id_id_da9a0d44_fk_base_worktype_id` (`work_type_id_id`),
+  KEY `company_id_id_5912bfe7_fk_base_company_id` (`company_id_id`),
+  KEY `created_by_id_1c73f9ba_fk_auth_user_id` (`created_by_id`),
+  KEY `modified_by_id_947a87fd_fk_auth_user_id` (`modified_by_id`),
+  CONSTRAINT `company_id_id_5912bfe7_fk_base_company_id` FOREIGN KEY (`company_id_id`) REFERENCES `base_company` (`id`),
+  CONSTRAINT `created_by_id_1c73f9ba_fk_auth_user_id` FOREIGN KEY (`created_by_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `modified_by_id_947a87fd_fk_auth_user_id` FOREIGN KEY (`modified_by_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `shift_id_id_2a990c10_fk_base_employeeshift_id` FOREIGN KEY (`shift_id_id`) REFERENCES `base_employeeshift` (`id`),
+  CONSTRAINT `work_type_id_id_da9a0d44_fk_base_worktype_id` FOREIGN KEY (`work_type_id_id`) REFERENCES `base_worktype` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -7532,87 +7532,87 @@ LOCK TABLES `payroll_allowance` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `payroll_allowance_exclude_employees`
+-- Table structure for table `exclude_employees`
 --
 
-DROP TABLE IF EXISTS `payroll_allowance_exclude_employees`;
+DROP TABLE IF EXISTS `exclude_employees`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `payroll_allowance_exclude_employees` (
+CREATE TABLE `exclude_employees` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `allowance_id` bigint(20) NOT NULL,
   `employee_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `payroll_allowance_exclud_allowance_id_employee_id_1c31b105_uniq` (`allowance_id`,`employee_id`),
-  KEY `payroll_allowance_ex_employee_id_aa853e81_fk_employee_` (`employee_id`),
-  CONSTRAINT `payroll_allowance_ex_allowance_id_71401ad3_fk_payroll_a` FOREIGN KEY (`allowance_id`) REFERENCES `payroll_allowance` (`id`),
-  CONSTRAINT `payroll_allowance_ex_employee_id_aa853e81_fk_employee_` FOREIGN KEY (`employee_id`) REFERENCES `employee_employee` (`id`)
+  UNIQUE KEY `exclud_allowance_id_employee_id_1c31b105_uniq` (`allowance_id`,`employee_id`),
+  KEY `ex_employee_id_aa853e81_fk_employee_` (`employee_id`),
+  CONSTRAINT `ex_allowance_id_71401ad3_fk_payroll_a` FOREIGN KEY (`allowance_id`) REFERENCES `payroll_allowance` (`id`),
+  CONSTRAINT `ex_employee_id_aa853e81_fk_employee_` FOREIGN KEY (`employee_id`) REFERENCES `employee_employee` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `payroll_allowance_exclude_employees`
+-- Dumping data for table `exclude_employees`
 --
 
-LOCK TABLES `payroll_allowance_exclude_employees` WRITE;
-/*!40000 ALTER TABLE `payroll_allowance_exclude_employees` DISABLE KEYS */;
-/*!40000 ALTER TABLE `payroll_allowance_exclude_employees` ENABLE KEYS */;
+LOCK TABLES `exclude_employees` WRITE;
+/*!40000 ALTER TABLE `exclude_employees` DISABLE KEYS */;
+/*!40000 ALTER TABLE `exclude_employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `payroll_allowance_other_conditions`
+-- Table structure for table `other_conditions`
 --
 
-DROP TABLE IF EXISTS `payroll_allowance_other_conditions`;
+DROP TABLE IF EXISTS `other_conditions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `payroll_allowance_other_conditions` (
+CREATE TABLE `other_conditions` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `allowance_id` bigint(20) NOT NULL,
   `multiplecondition_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `payroll_allowance_other__allowance_id_multiplecon_ff137d60_uniq` (`allowance_id`,`multiplecondition_id`),
-  KEY `payroll_allowance_ot_multiplecondition_id_c6d11700_fk_payroll_m` (`multiplecondition_id`),
-  CONSTRAINT `payroll_allowance_ot_allowance_id_91385ebf_fk_payroll_a` FOREIGN KEY (`allowance_id`) REFERENCES `payroll_allowance` (`id`),
-  CONSTRAINT `payroll_allowance_ot_multiplecondition_id_c6d11700_fk_payroll_m` FOREIGN KEY (`multiplecondition_id`) REFERENCES `payroll_multiplecondition` (`id`)
+  UNIQUE KEY `other__allowance_id_multiplecon_ff137d60_uniq` (`allowance_id`,`multiplecondition_id`),
+  KEY `ot_multiplecondition_id_c6d11700_fk_payroll_m` (`multiplecondition_id`),
+  CONSTRAINT `ot_allowance_id_91385ebf_fk_payroll_a` FOREIGN KEY (`allowance_id`) REFERENCES `payroll_allowance` (`id`),
+  CONSTRAINT `ot_multiplecondition_id_c6d11700_fk_payroll_m` FOREIGN KEY (`multiplecondition_id`) REFERENCES `payroll_multiplecondition` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `payroll_allowance_other_conditions`
+-- Dumping data for table `other_conditions`
 --
 
-LOCK TABLES `payroll_allowance_other_conditions` WRITE;
-/*!40000 ALTER TABLE `payroll_allowance_other_conditions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `payroll_allowance_other_conditions` ENABLE KEYS */;
+LOCK TABLES `other_conditions` WRITE;
+/*!40000 ALTER TABLE `other_conditions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `other_conditions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `payroll_allowance_specific_employees`
+-- Table structure for table `specific_employees`
 --
 
-DROP TABLE IF EXISTS `payroll_allowance_specific_employees`;
+DROP TABLE IF EXISTS `specific_employees`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `payroll_allowance_specific_employees` (
+CREATE TABLE `specific_employees` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `allowance_id` bigint(20) NOT NULL,
   `employee_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `payroll_allowance_specif_allowance_id_employee_id_00a48a04_uniq` (`allowance_id`,`employee_id`),
-  KEY `payroll_allowance_sp_employee_id_8537de68_fk_employee_` (`employee_id`),
-  CONSTRAINT `payroll_allowance_sp_allowance_id_447cbbe6_fk_payroll_a` FOREIGN KEY (`allowance_id`) REFERENCES `payroll_allowance` (`id`),
-  CONSTRAINT `payroll_allowance_sp_employee_id_8537de68_fk_employee_` FOREIGN KEY (`employee_id`) REFERENCES `employee_employee` (`id`)
+  UNIQUE KEY `specif_allowance_id_employee_id_00a48a04_uniq` (`allowance_id`,`employee_id`),
+  KEY `sp_employee_id_8537de68_fk_employee_` (`employee_id`),
+  CONSTRAINT `sp_allowance_id_447cbbe6_fk_payroll_a` FOREIGN KEY (`allowance_id`) REFERENCES `payroll_allowance` (`id`),
+  CONSTRAINT `sp_employee_id_8537de68_fk_employee_` FOREIGN KEY (`employee_id`) REFERENCES `employee_employee` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `payroll_allowance_specific_employees`
+-- Dumping data for table `specific_employees`
 --
 
-LOCK TABLES `payroll_allowance_specific_employees` WRITE;
-/*!40000 ALTER TABLE `payroll_allowance_specific_employees` DISABLE KEYS */;
-/*!40000 ALTER TABLE `payroll_allowance_specific_employees` ENABLE KEYS */;
+LOCK TABLES `specific_employees` WRITE;
+/*!40000 ALTER TABLE `specific_employees` DISABLE KEYS */;
+/*!40000 ALTER TABLE `specific_employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
